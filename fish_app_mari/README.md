@@ -1,13 +1,1 @@
-# Plant App - Flutter UI
-
-## [Watch it on YouTube](https://youtu.be/LN668OAUrK4)
-
-**Packages we are using:**
-
-- flutter_svg: [link](https://pub.dev/packages/flutter_svg)
-
-Nice clean plant app UI using flutter, the Home page you will get search box than a horizontal list of recommended plants. At the bottom featured plans list. On the details page, a big image with its 4 icons on the right side also add to the cart button.
-
-### Plant App Final UI
-
-![App UI](/plant.png)
+figma link: https://www.figma.com/file/D6neGMhWIFS7QD2U9Zk0yp/%EC%84%B8%EC%9E%91%EC%95%84-%EC%84%B8%EC%83%81%EC%97%90%EC%84%9C-%EA%B0%80%EC%9E%A5-%EC%9E%91%EC%9D%80-%EC%95%84%EC%BF%A0%EC%95%84%EB%A6%AC%EC%9B%80?node-id=0%3A1
