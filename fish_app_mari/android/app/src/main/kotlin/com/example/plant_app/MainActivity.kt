@@ -1,4 +1,4 @@
-package com.example.fish_app_mari
+package com.example.plant_app
 
 import io.flutter.embedding.android.FlutterActivity
 

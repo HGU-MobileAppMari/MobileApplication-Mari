@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>372119692399-lv00o454qhv5jki25a4m0m0vui3n4af0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.372119692399-lv00o454qhv5jki25a4m0m0vui3n4af0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDSgNti2eOJKe6xMFuKpyNNvNTRlG4fKA0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>372119692399</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.fishAppMari</string>
+	<key>PROJECT_ID</key>
+	<string>mobappdev-project</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mobappdev-project.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:372119692399:ios:c44acb7b3890011138d99a</string>
+</dict>
+</plist>
