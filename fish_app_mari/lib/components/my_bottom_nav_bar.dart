@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fish_app_mari/constants.dart';
 
 import '../constants.dart';
 
@@ -16,7 +17,7 @@ class MyBottomNavBar extends StatelessWidget {
         right: kDefaultPadding * 2,
         bottom: kDefaultPadding,
       ),
-      height: 80,
+      height: 100,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -30,20 +31,32 @@ class MyBottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          IconButton(
-            icon: SvgPicture.asset("assets/icons/flower.svg"),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: SvgPicture.asset("assets/icons/heart-icon.svg"),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: SvgPicture.asset("assets/icons/user-icon.svg"),
-            onPressed: () {},
-          ),
+          iconWithText(Icon(Icons.home_outlined), '어항 자랑', () {}),
+          iconWithText(Icon(Icons.menu_book_outlined), '사전', () {}),
+          iconWithText(Icon(Icons.shopping_cart_outlined), '분양', () {}),
+          iconWithText(Icon(Icons.location_on_outlined), '가게', () {}),
+          iconWithText(Icon(Icons.set_meal_outlined), '이름 짓기', () {}),
         ],
       ),
+    );
+  }
+
+  Column iconWithText(Icon icon, String text, Function press) {
+    return Column(
+      children: [
+        IconButton(
+          icon: icon,
+          color: kTextColor,
+          onPressed: press,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            color: kTextColor,
+            fontSize: 14.0,
+          ),
+        ),
+      ],
     );
   }
 }

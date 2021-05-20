@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fish_app_mari/constants.dart';
 
 import '../../../constants.dart';
 
@@ -83,7 +84,11 @@ class HeaderWithSearchBox extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SvgPicture.asset("assets/icons/search.svg"),
+                  Icon(
+                    Icons.search,
+                    size: 30.0,
+                    color: kPrimaryColor,
+                  ),
                 ],
               ),
             ),

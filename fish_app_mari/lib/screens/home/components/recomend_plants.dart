@@ -12,7 +12,7 @@ class RecomendsPlants extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
+      child: Column(
         children: <Widget>[
           RecomendPlantCard(
             image: "assets/images/image_1.png",
@@ -78,7 +78,7 @@ class RecomendPlantCard extends StatelessWidget {
         top: kDefaultPadding / 2,
         bottom: kDefaultPadding * 2.5,
       ),
-      width: size.width * 0.4,
+      width: size.width * 0.8,
       child: Column(
         children: <Widget>[
           Image.asset(image),

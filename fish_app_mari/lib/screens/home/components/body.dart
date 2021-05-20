@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fish_app_mari/constants.dart';
 
 import 'featurred_plants.dart';
-import 'header_with_seachbox.dart';
+import 'header.dart';
 import 'recomend_plants.dart';
 import 'title_with_more_bbtn.dart';
 
@@ -16,11 +16,9 @@ class Body extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          HeaderWithSearchBox(size: size),
-          TitleWithMoreBtn(title: "Recomended", press: () {}),
+          Header(size: size),
+          TitleWithMoreBtn(title: "내 어항 자랑하기", press: () {}),
           RecomendsPlants(),
-          TitleWithMoreBtn(title: "Featured Plants", press: () {}),
-          FeaturedPlants(),
           SizedBox(height: kDefaultPadding),
         ],
       ),

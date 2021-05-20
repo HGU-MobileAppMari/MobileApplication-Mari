@@ -26,7 +26,7 @@ class TitleWithMoreBtn extends StatelessWidget {
             color: kPrimaryColor,
             onPressed: press,
             child: Text(
-              "More",
+              "ADD",
               style: TextStyle(color: Colors.white),
             ),
           ),

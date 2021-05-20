@@ -5,6 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:provider/provider.dart';
 
+import 'package:fish_app_mari/screens/home/home_screen.dart';
+
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,14 @@ class LoginPage extends StatelessWidget {
             Consumer<ApplicationState>(
               builder: (context, appState, _) {
                 if (appState.loggedIn) {
-                  print('logged in go home page');
+                  print('logged in');
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ));
+                  });
                 } else {
                   print('logged out');
                 }
@@ -50,18 +59,6 @@ class LoginPage extends StatelessWidget {
                           onPressed: () {
                             appState.signInWithGoogle();
                           }),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(40.0, 5.0, 40.0, 10.0),
-                      child: RaisedButton(
-                        onPressed: () => appState.signOut(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('SIGN OUT'),
-                          ],
-                        ),
-                      ),
                     ),
                   ],
                 );
@@ -109,10 +106,5 @@ class ApplicationState extends ChangeNotifier {
     notifyListeners();
 
     return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
-
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-    notifyListeners();
   }
 }
