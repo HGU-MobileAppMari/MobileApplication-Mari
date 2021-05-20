@@ -88,10 +88,10 @@ class ApplicationState extends ChangeNotifier {
     FirebaseAuth.instance.userChanges().listen((user) {
       if (user == null) {
         loggedIn = false;
-        print('User is signed out!');
+        //print('User is signed out!');
       } else {
         loggedIn = true;
-        print('User is signed in!');
+        //print('User is signed in!');
       }
       notifyListeners();
     });

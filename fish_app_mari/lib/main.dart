@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plant_app/constants.dart';
-import 'package:plant_app/screens/home/home_screen.dart';
+import 'package:fish_app_mari/constants.dart';
+import 'package:fish_app_mari/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'login.dart';
