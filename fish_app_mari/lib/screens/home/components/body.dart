@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fish_app_mari/constants.dart';
 
-import 'featurred_plants.dart';
+import 'posted_fish.dart';
 import 'header.dart';
 import 'recomend_plants.dart';
 import 'title_with_more_bbtn.dart';

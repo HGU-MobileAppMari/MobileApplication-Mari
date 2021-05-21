@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class FeaturedPlants extends StatelessWidget {
-  const FeaturedPlants({
+class PostedFish extends StatelessWidget {
+  const PostedFish({
     Key key,
   }) : super(key: key);
 
@@ -13,11 +13,11 @@ class FeaturedPlants extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          FeaturePlantCard(
+          FishCard(
             image: "assets/images/bottom_img_1.png",
             press: () {},
           ),
-          FeaturePlantCard(
+          FishCard(
             image: "assets/images/bottom_img_2.png",
             press: () {},
           ),
@@ -27,8 +27,8 @@ class FeaturedPlants extends StatelessWidget {
   }
 }
 
-class FeaturePlantCard extends StatelessWidget {
-  const FeaturePlantCard({
+class FishCard extends StatelessWidget {
+  const FishCard({
     Key key,
     this.image,
     this.press,
