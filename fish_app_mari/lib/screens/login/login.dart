@@ -73,6 +73,7 @@ class LoginPage extends StatelessWidget {
 
 class ApplicationState extends ChangeNotifier {
   bool loggedIn = false;
+  String username;
 
   ApplicationState() {
     init();
@@ -88,6 +89,7 @@ class ApplicationState extends ChangeNotifier {
         //print('User is signed out!');
       } else {
         loggedIn = true;
+        username = user.displayName;
         //print('User is signed in!');
       }
       notifyListeners();

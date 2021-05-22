@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fish_app_mari/constants.dart';
+import 'package:provider/provider.dart';
 
+import '../../login/login.dart';
 import '../../../constants.dart';
 
 class Header extends StatelessWidget {
@@ -25,7 +27,7 @@ class Header extends StatelessWidget {
               right: kDefaultPadding,
               bottom: kDefaultPadding,
             ),
-            height: size.height * 0.2 - 100,
+            height: size.height * 0.2 - 80,
             decoration: BoxDecoration(
               color: kPrimaryColor,
               borderRadius: BorderRadius.only(
@@ -35,10 +37,12 @@ class Header extends StatelessWidget {
             ),
             child: Row(
               children: <Widget>[
-                Text(
-                  'Welcome to MARI',
-                  style: Theme.of(context).textTheme.headline5.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                Consumer<ApplicationState>(
+                  builder: (context, appState, _) => Text(
+                    'Welcome to MARI,\n${appState.username}',
+                    style: Theme.of(context).textTheme.headline5.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Spacer(),
                 Image.asset("assets/images/logo.png")

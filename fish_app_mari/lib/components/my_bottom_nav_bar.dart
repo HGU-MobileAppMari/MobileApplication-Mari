@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fish_app_mari/constants.dart';
 
+import '../screens/dictionary/dictionary_screen.dart';
 import '../constants.dart';
 
 class MyBottomNavBar extends StatelessWidget {
@@ -32,7 +32,14 @@ class MyBottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           iconWithText(Icon(Icons.home_outlined), '어항 자랑', () {}),
-          iconWithText(Icon(Icons.menu_book_outlined), '사전', () {}),
+          iconWithText(Icon(Icons.menu_book_outlined), '사전', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DictionaryScreen(),
+              ),
+            );
+          }),
           iconWithText(Icon(Icons.shopping_cart_outlined), '분양', () {}),
           iconWithText(Icon(Icons.location_on_outlined), '가게', () {}),
           iconWithText(Icon(Icons.set_meal_outlined), '이름 짓기', () {}),
