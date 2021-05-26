@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fish_app_mari/components/my_bottom_nav_bar.dart';
 import 'package:fish_app_mari/screens/home/components/body.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fish_app_mari/auth_service.dart';
+import 'package:fish_app_mari/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,17 +11,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
+    final AuthService auth = Provider.of(context).auth;
+
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(auth),
       drawer: buildDrawer(),
       body: Body(),
       bottomNavigationBar: MyBottomNavBar(),
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(AuthService auth) {
     return AppBar(
       iconTheme: IconThemeData(color: Colors.white),
       elevation: 0,
@@ -31,8 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             semanticLabel: 'logout',
           ),
           onPressed: () {
-            signOut();
-            Navigator.popUntil(context, ModalRoute.withName('/'));
+            auth.signOut();
           },
         ),
       ],
@@ -73,9 +76,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-  }
-
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
   }
 }
