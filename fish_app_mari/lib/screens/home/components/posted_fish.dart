@@ -40,7 +40,7 @@ class _PostedFishState extends State<PostedFish> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PostDetailScreen(),
+            builder: (context) => PostDetailScreen(postId: id),
           ),
         );
       },

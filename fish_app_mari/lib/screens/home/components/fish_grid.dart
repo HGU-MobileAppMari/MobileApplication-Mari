@@ -23,13 +23,6 @@ class FishGrid extends StatelessWidget {
               (post) => FishCard(
                 post: post,
                 onPostPressed: _onPostPressed,
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) {
-                //     },
-                //   ),
-                // );
               ),
             )
             .toList(),

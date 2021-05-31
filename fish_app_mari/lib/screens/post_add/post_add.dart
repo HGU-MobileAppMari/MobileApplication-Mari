@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:fish_app_mari/auth_service.dart' as auth;
 import 'package:fish_app_mari/model/post.dart';
 import 'package:fish_app_mari/model/post_transaction.dart';
 
@@ -19,6 +19,8 @@ class _PostAddScreenState extends State<PostAddScreen> {
   final _formKey = GlobalKey<FormState>(debugLabel: '_PostAddScreenState');
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +122,7 @@ class _PostAddScreenState extends State<PostAddScreen> {
                 if (_formKey.currentState.validate()) {
                   addPost(
                     Post(
-                      writer: auth.userName,
+                      writer: _firebaseAuth.currentUser.displayName,
                       title: _titleController.text,
                       description: _descriptionController.text,
                       imageURL: _image.path,
