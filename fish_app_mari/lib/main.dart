@@ -38,7 +38,9 @@ class HomeController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService auth = Provider.of(context).auth;
+    final AuthService auth = Provider
+        .of(context)
+        .auth;
 
     return StreamBuilder<User>(
       stream: auth.onAuthStateChanged,
@@ -54,40 +56,3 @@ class HomeController extends StatelessWidget {
     );
   }
 }
-
-// Future<void> main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(
-//     ChangeNotifierProvider(
-//       create: (context) => ApplicationState(),
-//       builder: (context, _) => MyApp(),
-//     ),
-//   );
-// }
-//
-// void main() {
-//   runApp(
-//     ChangeNotifierProvider(
-//       create: (context) => ApplicationState(),
-//       builder: (context, _) => MyApp(),
-//     ),
-//   );
-// }
-//
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'MARI',
-//       theme: ThemeData(
-//         scaffoldBackgroundColor: kBackgroundColor,
-//         primaryColor: kPrimaryColor,
-//         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
-//         visualDensity: VisualDensity.adaptivePlatformDensity,
-//       ),
-//       home: LoginPage(),
-//     );
-//   }
-// }
