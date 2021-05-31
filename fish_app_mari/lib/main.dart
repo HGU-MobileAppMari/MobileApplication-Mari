@@ -7,7 +7,7 @@ import 'package:fish_app_mari/screens/login/login.dart';
 
 import 'auth_service.dart';
 import 'auth_provider.dart';
-
+import 'app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +40,7 @@ class HomeController extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
 
-    return StreamBuilder <User>(
+    return StreamBuilder<User>(
       stream: auth.onAuthStateChanged,
       builder: (context, AsyncSnapshot<User> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
@@ -54,7 +54,6 @@ class HomeController extends StatelessWidget {
     );
   }
 }
-
 
 // Future<void> main() async {
 //   WidgetsFlutterBinding.ensureInitialized();

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fish_app_mari/constants.dart';
+import 'package:fish_app_mari/screens/post_add/post_add.dart';
 
 import 'posted_fish.dart';
 import 'header.dart';
-import 'recomend_plants.dart';
 import 'title_with_more_bbtn.dart';
 
 class Body extends StatelessWidget {
@@ -17,8 +17,17 @@ class Body extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Header(size: size),
-          TitleWithMoreBtn(title: "내 어항 자랑하기", press: () {}),
-          RecomendsPlants(),
+          TitleWithMoreBtn(
+              title: "내 어항 자랑하기",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostAddScreen(),
+                  ),
+                );
+              }),
+          PostedFish(),
           SizedBox(height: kDefaultPadding),
         ],
       ),

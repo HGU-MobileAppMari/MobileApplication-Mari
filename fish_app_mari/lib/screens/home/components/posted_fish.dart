@@ -1,62 +1,69 @@
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
+import 'package:fish_app_mari/model/post_transaction.dart';
+import 'package:fish_app_mari/model/post.dart';
+import 'fish_grid.dart';
+import 'package:fish_app_mari/screens/post_detail/post_detail.dart';
 
-import '../../../constants.dart';
-
-class PostedFish extends StatelessWidget {
-  const PostedFish({
-    Key key,
-  }) : super(key: key);
-
+class PostedFish extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[
-          FishCard(
-            image: "assets/images/bottom_img_1.png",
-            press: () {},
-          ),
-          FishCard(
-            image: "assets/images/bottom_img_2.png",
-            press: () {},
-          ),
-        ],
-      ),
-    );
-  }
+  _PostedFishState createState() => _PostedFishState();
 }
 
-class FishCard extends StatelessWidget {
-  const FishCard({
-    Key key,
-    this.image,
-    this.press,
-  }) : super(key: key);
-  final String image;
-  final Function press;
+class _PostedFishState extends State<PostedFish> {
+  StreamSubscription<QuerySnapshot> _currentSubscription;
+  List<Post> _posts = <Post>[];
+
+  _PostedFishState() {
+    _currentSubscription = loadAllPosts().listen(_updatePosts);
+  }
+
+  @override
+  void dispose() {
+    _currentSubscription?.cancel();
+    super.dispose();
+  }
+
+  void _updatePosts(QuerySnapshot snapshot) {
+    setState(() {
+      _posts = getPostsFromQuery(snapshot);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: press,
-      child: Container(
-        margin: EdgeInsets.only(
-          left: kDefaultPadding,
-          top: kDefaultPadding / 2,
-          bottom: kDefaultPadding / 2,
-        ),
-        width: size.width * 0.8,
-        height: 185,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(image),
+    return FishGrid(
+      posts: _posts,
+      onPostPressed: (id) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PostDetailScreen(postId: id),
           ),
-        ),
-      ),
+        );
+      },
     );
+    // return SingleChildScrollView(
+    //   scrollDirection: Axis.horizontal,
+    //   child: Column(
+    //     children: <Widget>[
+    //       PostedFishCard(
+    //         image: "assets/images/image_1.png",
+    //         title: "Samantha",
+    //         country: "Russia",
+    //         press: () {
+    //           Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //               builder: (context) => DetailsScreen(),
+    //             ),
+    //           );
+    //         },
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }
