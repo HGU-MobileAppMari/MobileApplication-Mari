@@ -12,9 +12,14 @@ class Body extends StatelessWidget {
     // It will provie us total height  and width of our screen
     Size size = MediaQuery.of(context).size;
     // it enable scrolling on small device
+    ScrollController _scrollController = new ScrollController(
+      initialScrollOffset: 0.0,
+      keepScrollOffset: true,
+    );
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Header(size: size),
           TitleWithMoreBtn(
