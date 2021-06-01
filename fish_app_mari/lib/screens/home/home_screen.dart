@@ -71,9 +71,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
       ],
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: IndexedStack(
+          children: <Widget>[
+            Body(),
+            Text(
+              'Music',
+              style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
+            ),
+            AdoptPage(),
+            Text(
+              'News',
+              style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
+            ),
+            NamePage(),
+          ],
+          index: _selectedIndex,
+        )
     );
   }
 }
