@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fish_app_mari/model/adopt_post.dart';
 import 'package:fish_app_mari/model/adopt_post_transaction.dart';
 import 'fish_adopt_grid.dart';
-import 'package:fish_app_mari/screens/post_detail/post_detail.dart';
+import 'package:fish_app_mari/screens/adopt/adopt_detail.dart';
 
 class PostedFish extends StatefulWidget {
   @override
@@ -36,11 +36,13 @@ class _PostedFishState extends State<PostedFish> {
     return FishGrid(
       posts: _posts,
       onPostPressed: (id) {
+        print("id: " + id.toString() + "@@\n");
+        // print(_posts[].title)
         Navigator.push(
           context,
           MaterialPageRoute(
-            // builder: (context) => PostDetailScreen(postId: id),
-            builder: (context) => null,
+            builder: (context) => AdoptDetailScreen(postId: id),
+            // builder: (context) => null,
           ),
         );
       },

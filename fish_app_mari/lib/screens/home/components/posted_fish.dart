@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:fish_app_mari/model/post_transaction.dart';
 import 'package:fish_app_mari/model/post.dart';
@@ -45,25 +44,5 @@ class _PostedFishState extends State<PostedFish> {
         );
       },
     );
-    // return SingleChildScrollView(
-    //   scrollDirection: Axis.horizontal,
-    //   child: Column(
-    //     children: <Widget>[
-    //       PostedFishCard(
-    //         image: "assets/images/image_1.png",
-    //         title: "Samantha",
-    //         country: "Russia",
-    //         press: () {
-    //           Navigator.push(
-    //             context,
-    //             MaterialPageRoute(
-    //               builder: (context) => DetailsScreen(),
-    //             ),
-    //           );
-    //         },
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }

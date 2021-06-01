@@ -23,8 +23,8 @@ class AdoptPost {
     this.description,
     this.createdAt,
     this.location})
-    : id = null,
-      reference = null;
+      : id = null,
+        reference = null;
 
   AdoptPost.fromSnapshot(DocumentSnapshot snapshot)
       : assert(snapshot != null),
