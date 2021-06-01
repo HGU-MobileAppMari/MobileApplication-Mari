@@ -6,7 +6,6 @@ import 'package:fish_app_mari/components/my_appbar.dart';
 import 'package:fish_app_mari/screens/post_detail/components/body.dart';
 
 class PostDetailScreen extends StatelessWidget {
-  //static const route = '/post';
   final String _postId;
 
   PostDetailScreen({

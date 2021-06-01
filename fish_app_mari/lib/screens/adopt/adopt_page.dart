@@ -3,7 +3,6 @@ import 'package:fish_app_mari/constants.dart';
 import 'package:fish_app_mari/model/adopt_post.dart';
 import 'adopt_add.dart';
 import 'posted_adopt_fish.dart';
-import 'package:fish_app_mari/screens/home/components/title_with_more_bbtn.dart';
 
 class AdoptPage extends StatefulWidget {
   @override
@@ -11,7 +10,6 @@ class AdoptPage extends StatefulWidget {
 }
 
 class _AdoptPageState extends State<AdoptPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,16 +17,6 @@ class _AdoptPageState extends State<AdoptPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // TitleWithMoreBtn(
-              //     title: "물고기 분양하기",
-              //     press: () {
-              //       Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //           builder: (context) => AdoptAddScreen(),
-              //         ),
-              //       );
-              // }),
               SizedBox(height: 10),
               FlatButton(
                 shape: RoundedRectangleBorder(
@@ -49,8 +37,7 @@ class _AdoptPageState extends State<AdoptPage> {
                 ),
               ),
               PostedFish(),
-              SizedBox(height: kDefaultPadding),
-            ],
+            ]
           ),
         ),
       )

@@ -18,19 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
-    List _widgetOptions = [
-      Body(),
-      Text(
-        'Music',
-        style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
-      ),
-      AdoptPage(),
-      Text(
-        'News',
-        style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
-      ),
-      NamePage(),
-    ];
     return Scaffold (
       appBar: MyAppbar(auth: auth),
       drawer: MyDrawer(),
@@ -51,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             label: "어항 자랑",
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(Icons.home_outlined)
           ),
           BottomNavigationBarItem(
             label: "사전",
@@ -71,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
       ],
       ),
-      body: IndexedStack(
+        body: IndexedStack(
           children: <Widget>[
             Body(),
             Text(
