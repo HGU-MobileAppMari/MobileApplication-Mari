@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fish_app_mari/model/post.dart';
@@ -52,7 +52,8 @@ class FishCard extends StatelessWidget {
                             text: "${post.title}\n",
                             style: Theme.of(context).textTheme.button),
                         TextSpan(
-                          text: "${post.creationTime.toDate()}",
+                          text:
+                              "${DateFormat('yyyy년 MM월 dd일 kk시mm분').format(post.creationTime.toDate())}",
                           style: TextStyle(
                             color: kPrimaryColor.withOpacity(0.5),
                           ),

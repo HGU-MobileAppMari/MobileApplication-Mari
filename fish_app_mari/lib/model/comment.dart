@@ -17,8 +17,8 @@ class Comment {
         creationTime = snapshot.data()['creationTime'],
         reference = snapshot.reference;
 
-  Comment.fromUserInput({this.userId, this.writer, this.text})
+  Comment.fromUserInput(
+      {this.userId, this.writer, this.text, this.creationTime})
       : id = null,
-        creationTime = null,
         reference = null;
 }

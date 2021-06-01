@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fish_app_mari/constants.dart';
 
 import 'image_and_text.dart';
-// import 'title_and_price.dart';
+import 'post_comment.dart';
 
 class Body extends StatelessWidget {
   final String _postId;
@@ -19,6 +19,7 @@ class Body extends StatelessWidget {
           ImageAndText(postId: _postId),
           // TitleAndPrice(title: "Angelica", country: "Russia", price: 440),
           SizedBox(height: kDefaultPadding),
+          //PostComment(postId: _postId),
           // Row(
           //   children: <Widget>[
           //     SizedBox(
