@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:fish_app_mari/auth_service.dart' as auth;
 import 'package:fish_app_mari/model/post_transaction.dart';
 import 'package:fish_app_mari/model/post.dart';
 import 'package:fish_app_mari/model/comment.dart';
@@ -25,7 +24,7 @@ class ImageAndText extends StatefulWidget {
   final String _postId;
 
   @override
-  _ImageAndTextState createState() => _ImageAndTextState();
+  _ImageAndTextState createState() => _ImageAndTextState(postId: _postId);
 }
 
 class _ImageAndTextState extends State<ImageAndText> {
@@ -43,7 +42,6 @@ class _ImageAndTextState extends State<ImageAndText> {
       setState(() {
         _post = post;
         _userId = _firebaseAuth.currentUser.uid;
-        print('get test : $postId');
         _currentCommentSubscription = _post.reference
             .collection('comments')
             .orderBy('creationTime', descending: true)
@@ -73,34 +71,29 @@ class _ImageAndTextState extends State<ImageAndText> {
         : Padding(
             padding: const EdgeInsets.only(bottom: kDefaultPadding * 3),
             child: SizedBox(
-              //height: widget.size.height * 0.8,
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // Expanded(
-                  //   child: Padding(
-                  //     padding:
-                  //         const EdgeInsets.symmetric(vertical: kDefaultPadding * 3),
-                  //     child: Column(
-                  //       children: <Widget>[
-                  //         Align(
-                  //           alignment: Alignment.topLeft,
-                  //           child: IconButton(
-                  //             padding:
-                  //                 EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                  //             icon: SvgPicture.asset("assets/icons/back_arrow.svg"),
-                  //             onPressed: () {
-                  //               Navigator.pop(context);
-                  //             },
-                  //           ),
-                  //         ),
-                  //         Spacer(),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   Container(
-                    // height: widget.size.height * 0.8,
-                    // width: widget.size.width * 0.75,
+                    padding: EdgeInsets.only(
+                      top: 30.0,
+                      left: 30.0,
+                    ),
+                    child: Text(
+                      _post.title,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    height: 10.0,
+                    indent: 20.0,
+                    endIndent: 20.0,
+                    color: Colors.black,
+                  ),
+                  Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(63),
@@ -120,6 +113,7 @@ class _ImageAndTextState extends State<ImageAndText> {
                       ),
                     ),
                   ),
+                  
                 ],
               ),
             ),

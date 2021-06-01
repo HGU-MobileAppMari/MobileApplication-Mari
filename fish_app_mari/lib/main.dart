@@ -7,7 +7,6 @@ import 'package:fish_app_mari/screens/login/login.dart';
 
 import 'auth_service.dart';
 import 'auth_provider.dart';
-import 'app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -6,7 +6,6 @@ import 'package:fish_app_mari/components/my_appbar.dart';
 import 'package:fish_app_mari/screens/post_detail/components/body.dart';
 
 class PostDetailScreen extends StatelessWidget {
-  //static const route = '/post';
   final String _postId;
 
   PostDetailScreen({
@@ -19,6 +18,7 @@ class PostDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
 
+    print('post detail screen: $_postId');
     return Scaffold(
       appBar: MyAppbar(auth: auth),
       body: Body(
@@ -26,10 +26,4 @@ class PostDetailScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class PostDetailScreenArguments {
-  final String id;
-
-  PostDetailScreenArguments({@required this.id});
 }
