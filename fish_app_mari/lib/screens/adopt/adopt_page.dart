@@ -13,34 +13,34 @@ class _AdoptPageState extends State<AdoptPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 10),
-              FlatButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                color: kPrimaryColor,
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AdoptAddScreen(),
+        body: Container(
+          child: SingleChildScrollView(
+            child: Column(
+                children: [
+                  SizedBox(height: 10),
+                  FlatButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                  );
-                },
-                child: Text(
-                  " + NEW ADOPT",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              PostedFish(),
-            ]
+                    color: kPrimaryColor,
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdoptAddScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      " + NEW ADOPT",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  PostedFish(),
+                ]
+            ),
           ),
-        ),
-      )
+        )
     );
   }
 }

@@ -19,45 +19,45 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
     return Scaffold (
-      appBar: MyAppbar(auth: auth),
-      drawer: MyDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: kTextColor,
-        unselectedItemColor: kTextColor.withOpacity(.60),
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
-        currentIndex: _selectedIndex, //현재 선택된 Index
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-            print(_selectedIndex.toString() + " ");
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            label: "어항 자랑",
-            icon: Icon(Icons.home_outlined)
-          ),
-          BottomNavigationBarItem(
-            label: "사전",
-            icon: Icon(Icons.menu_book_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: "분양",
-            icon: Icon(Icons.shopping_cart_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: "가게",
-            icon: Icon(Icons.location_on_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: "이름짓기",
-            icon: Icon(Icons.set_meal_outlined),
-          ),
-      ],
-      ),
+        appBar: MyAppbar(auth: auth),
+        drawer: MyDrawer(),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          selectedItemColor: kTextColor,
+          unselectedItemColor: kTextColor.withOpacity(.60),
+          selectedFontSize: 14,
+          unselectedFontSize: 14,
+          currentIndex: _selectedIndex, //현재 선택된 Index
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+              print(_selectedIndex.toString() + " ");
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                label: "어항 자랑",
+                icon: Icon(Icons.home_outlined)
+            ),
+            BottomNavigationBarItem(
+              label: "사전",
+              icon: Icon(Icons.menu_book_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: "분양",
+              icon: Icon(Icons.shopping_cart_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: "가게",
+              icon: Icon(Icons.location_on_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: "이름짓기",
+              icon: Icon(Icons.set_meal_outlined),
+            ),
+          ],
+        ),
         body: IndexedStack(
           children: <Widget>[
             Body(),
