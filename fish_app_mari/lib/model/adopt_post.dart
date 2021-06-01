@@ -1,21 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+typedef PostPressedCallback = void Function(String postId);
+
 class AdoptPost {
-  final String userImage;
-  final String userName;
+  final String id;
+  final String writer;
+  final String writerImage;
+  final String title;
   final String fishName;
-  final String postImage;
-  final String caption;
+  final String postImageURL;
   final String description;
-  final String timestamp;
-  final String location;
+  final Timestamp createdAt;
+  final String location; // 전국, 서울, 경기, ... , default = null (전국)
+  final DocumentReference reference;
 
   AdoptPost({
-    this.userImage,
-    this.userName,
+    this.writerImage,
+    this.writer,
+    this.title,
     this.fishName,
-    this.postImage,
-    this.caption,
+    this.postImageURL,
     this.description,
-    this.timestamp,
-    this.location,
-  });
+    this.createdAt,
+    this.location})
+    : id = null,
+      reference = null;
+
+  AdoptPost.fromSnapshot(DocumentSnapshot snapshot)
+      : assert(snapshot != null),
+        id = snapshot.id,
+        reference = snapshot.reference,
+        writer = snapshot.data()['writer'],
+        writerImage = snapshot.data()['writer_image'],
+        fishName = snapshot.data()['fish_name'],
+        title = snapshot.data()['title'],
+        description = snapshot.data()['description'],
+        postImageURL = snapshot.data()['image_url'],
+        createdAt = snapshot.data()['created_at'],
+        location = snapshot.data()['location'];
 }
