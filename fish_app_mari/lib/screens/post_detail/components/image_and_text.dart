@@ -32,6 +32,9 @@ class _ImageAndTextState extends State<ImageAndText> {
   Post _post;
   String _userId;
   List<Comment> _comments = <Comment>[];
+  List<dynamic> _postLikers = <dynamic>[];
+  int likeNum;
+  int commentsNum;
 
   final _formKey = GlobalKey<FormState>(debugLabel: '_ImageAndTextState');
   final _commentController = TextEditingController();
@@ -44,6 +47,8 @@ class _ImageAndTextState extends State<ImageAndText> {
       setState(() {
         _post = post;
         _userId = _firebaseAuth.currentUser.uid;
+        _postLikers = _post.likeUsers;
+        likeNum = _postLikers.length;
         _currentCommentSubscription = _post.reference
             .collection('comments')
             .orderBy('creationTime')
@@ -54,6 +59,7 @@ class _ImageAndTextState extends State<ImageAndText> {
             _comments = commentSnap.docs.map((DocumentSnapshot doc) {
               return Comment.fromSnapshot(doc);
             }).toList();
+            commentsNum = _comments.length;
           });
         });
       });
@@ -64,6 +70,16 @@ class _ImageAndTextState extends State<ImageAndText> {
   void dispose() {
     _currentCommentSubscription?.cancel();
     super.dispose();
+  }
+
+  Future<void> pushLike(String postId, List<dynamic> likeUsers) {
+    FirebaseFirestore.instance.collection('posts').doc(postId).update({
+      'likeUsers': likeUsers,
+    });
+    setState(() {
+      _postLikers = likeUsers;
+      likeNum = _postLikers.length;
+    });
   }
 
   Divider buildDivider() {
@@ -119,18 +135,19 @@ class _ImageAndTextState extends State<ImageAndText> {
                   Container(
                     padding: EdgeInsets.only(
                       top: 30.0,
-                      left: 20.0,
-                      right: 20.0,
+                      left: 25.0,
+                      right: 25.0,
                     ),
                     child: Image.network(
                       _post.imageURL,
-                      fit: BoxFit.fill,
+                      //fit: BoxFit.cover,
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.only(
                       top: 30.0,
-                      left: 30.0,
+                      left: 25.0,
+                      right: 25.0,
                     ),
                     child: Text(
                       '${_post.description}',
@@ -138,6 +155,32 @@ class _ImageAndTextState extends State<ImageAndText> {
                         fontSize: 17,
                       ),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton.icon(
+                        icon: Icon(
+                            _postLikers.contains(_userId)
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: kPrimaryColor),
+                        onPressed: () {
+                          if (!_postLikers.contains(_userId)) {
+                            _postLikers.add(_userId);
+                            pushLike(_post.id, _postLikers);
+                          } else {
+                            _postLikers.remove(_userId);
+                            pushLike(_post.id, _postLikers);
+                          }
+                        },
+                        label: Text('$likeNum'),
+                      ),
+                      TextButton.icon(
+                        icon: Icon(Icons.comment, color: kPrimaryColor),
+                        label: Text('$commentsNum'),
+                      ),
+                    ],
                   ),
                   buildDivider(),
                   Padding(
@@ -169,7 +212,7 @@ class _ImageAndTextState extends State<ImageAndText> {
                                 await addComment(
                                   postId: _post.id,
                                   comment: Comment.fromUserInput(
-                                    userId: _firebaseAuth.currentUser.uid,
+                                    userId: _userId,
                                     writer:
                                         _firebaseAuth.currentUser.displayName,
                                     text: _commentController.text,
@@ -179,13 +222,7 @@ class _ImageAndTextState extends State<ImageAndText> {
                                 _commentController.clear();
                               }
                             },
-                            child: Row(
-                              children: [
-                                Icon(Icons.send),
-                                SizedBox(width: 4),
-                                Text('작성')
-                              ],
-                            ),
+                            child: Text('작성'),
                           ),
                         ],
                       ),

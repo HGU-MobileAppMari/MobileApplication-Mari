@@ -21,6 +21,7 @@ class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
           ),
           onPressed: () {
             _auth.signOut();
+            Navigator.pop(context);
           },
         ),
       ],
