@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fish_app_mari/model/post_transaction.dart';
 import 'package:fish_app_mari/model/post.dart';
 import 'package:fish_app_mari/model/comment.dart';
+import 'package:fish_app_mari/screens/post_add_or_edit/post_edit.dart';
 
 import '../../../constants.dart';
 
@@ -165,10 +166,18 @@ class _ImageAndTextState extends State<ImageAndText> {
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                             color: kPrimaryColor),
-                        onPressed: () {
+                        onPressed: () async {
                           if (!_postLikers.contains(_userId)) {
                             _postLikers.add(_userId);
                             pushLike(_post.id, _postLikers);
+                            print('push edit');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PostEditScreen(postId: widget._postId),
+                              ),
+                            );
                           } else {
                             _postLikers.remove(_userId);
                             pushLike(_post.id, _postLikers);

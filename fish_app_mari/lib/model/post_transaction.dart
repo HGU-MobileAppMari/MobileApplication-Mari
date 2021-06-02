@@ -5,12 +5,24 @@ import 'comment.dart';
 Future<void> addPost(Post post) {
   final posts = FirebaseFirestore.instance.collection('posts');
   return posts.add({
+    'userId': post.userId,
     'writer': post.writer,
     'title': post.title,
     'description': post.description,
     'imageURL': post.imageURL,
     'creationTime': post.creationTime,
     'likeUsers': post.likeUsers,
+  });
+}
+
+Future<void> editPost(
+    String postId, String title, String description, String imageURL) {
+  final firebase_post =
+      FirebaseFirestore.instance.collection('posts').doc(postId);
+  return firebase_post.update({
+    'title': title,
+    'description': description,
+    'imageURL': imageURL,
   });
 }
 
@@ -28,7 +40,6 @@ List<Post> getPostsFromQuery(QuerySnapshot snapshot) {
 }
 
 Future<Post> getPost(String postId) async {
-  print('getPost: $postId');
   return FirebaseFirestore.instance
       .collection('posts')
       .doc(postId)

@@ -4,6 +4,7 @@ typedef PostPressedCallback = void Function(String postId);
 
 class Post {
   final String id;
+  final String userId;
   final String writer;
   final String title;
   final String description;
@@ -13,7 +14,8 @@ class Post {
   final DocumentReference reference;
 
   Post(
-      {this.writer,
+      {this.userId,
+      this.writer,
       this.title,
       this.description,
       this.imageURL,
@@ -25,6 +27,7 @@ class Post {
   Post.fromSnapshot(DocumentSnapshot snapshot)
       : assert(snapshot != null),
         id = snapshot.id,
+        userId = snapshot.data()['userId'],
         writer = snapshot.data()['writer'],
         title = snapshot.data()['title'],
         description = snapshot.data()['description'],

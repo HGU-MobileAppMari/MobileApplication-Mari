@@ -8,26 +8,45 @@ import 'package:image_picker/image_picker.dart';
 import 'package:fish_app_mari/model/post.dart';
 import 'package:fish_app_mari/model/post_transaction.dart';
 
-class PostAddScreen extends StatefulWidget {
+//image edit problem
+class PostEditScreen extends StatefulWidget {
+  PostEditScreen({
+    Key key,
+    @required String postId,
+  })  : _postId = postId,
+        super(key: key);
+  final String _postId;
+
   @override
-  _PostAddScreenState createState() => _PostAddScreenState();
+  _PostEditScreenState createState() => _PostEditScreenState(postId: _postId);
 }
 
-class _PostAddScreenState extends State<PostAddScreen> {
+class _PostEditScreenState extends State<PostEditScreen> {
   File _image;
   final picker = ImagePicker();
-  final _formKey = GlobalKey<FormState>(debugLabel: '_PostAddScreenState');
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>(debugLabel: '_PostEditScreenState');
+
+  Post _post;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  _PostEditScreenState({@required String postId}) {
+    getPost(postId).then((Post post) {
+      setState(() {
+        _post = post;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final _titleController = TextEditingController(text: '${_post.title}');
+    final _descriptionController =
+        TextEditingController(text: '${_post.description}');
     Widget imageSection = Container(
       child: _image == null
-          ? Image.asset(
-              'assets/images/logo.png',
+          ? Image.network(
+              _post.imageURL,
               width: 600,
               height: 240,
               fit: BoxFit.fitHeight,
@@ -107,7 +126,7 @@ class _PostAddScreenState extends State<PostAddScreen> {
             Padding(
               padding: EdgeInsets.only(left: 90.0, right: 80.0),
               child: Text(
-                'Add',
+                'Edit',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -120,26 +139,25 @@ class _PostAddScreenState extends State<PostAddScreen> {
               child: Text('Save'),
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
-                  String imageName = _titleController.text +
-                      "_" +
-                      _firebaseAuth.currentUser.uid;
+                  String imageName =
+                      _post.creationTime.toString() + "_" + _post.userId;
                   Reference ref = FirebaseStorage.instance
                       .ref()
                       .child('posts')
                       .child(imageName);
-                  await ref.putFile(File(_image.path));
+                  if (_image != null) {
+                    await ref.putFile(File(_image.path));
+                  }
+
                   var url = await ref.getDownloadURL();
 
-                  addPost(
-                    Post(
-                      writer: _firebaseAuth.currentUser.displayName,
-                      title: _titleController.text,
-                      description: _descriptionController.text,
-                      imageURL: url,
-                      creationTime: Timestamp.now(),
-                    ),
+                  editPost(
+                    widget._postId,
+                    _titleController.text,
+                    _descriptionController.text,
+                    url,
                   );
-                  Navigator.pop(context);
+                  Navigator.pop(context, widget._postId);
                 }
               },
             ),
