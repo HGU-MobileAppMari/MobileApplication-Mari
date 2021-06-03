@@ -66,12 +66,24 @@ class _ImageAndTextState extends State<ImageAndText> {
       });
     });
   }
+  void getData() {
+    getPost(widget._postId).then((Post post) {
+      setState(() {
+        _post = post;
+      });
+    });
+  }
 
   @override
   void dispose() {
     _currentCommentSubscription?.cancel();
     super.dispose();
   }
+
+  // FutureOr onGoBack(dynamic value) {
+  //   getData();
+  //   setState(() {});
+  // }
 
   Future<void> pushLike(String postId, List<dynamic> likeUsers) {
     FirebaseFirestore.instance.collection('posts').doc(postId).update({
@@ -93,6 +105,7 @@ class _ImageAndTextState extends State<ImageAndText> {
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return _isLoading
         ? Center(child: CircularProgressIndicator())
         : Padding(
@@ -170,14 +183,6 @@ class _ImageAndTextState extends State<ImageAndText> {
                           if (!_postLikers.contains(_userId)) {
                             _postLikers.add(_userId);
                             pushLike(_post.id, _postLikers);
-                            print('push edit');
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    PostEditScreen(postId: widget._postId),
-                              ),
-                            );
                           } else {
                             _postLikers.remove(_userId);
                             pushLike(_post.id, _postLikers);

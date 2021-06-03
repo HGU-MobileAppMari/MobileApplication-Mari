@@ -37,9 +37,7 @@ class HomeController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService auth = Provider
-        .of(context)
-        .auth;
+    final AuthService auth = Provider.of(context).auth;
 
     return StreamBuilder<User>(
       stream: auth.onAuthStateChanged,

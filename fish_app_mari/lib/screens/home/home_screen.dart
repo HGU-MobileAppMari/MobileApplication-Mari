@@ -4,6 +4,7 @@ import 'package:fish_app_mari/components/my_drawer.dart';
 import 'package:fish_app_mari/screens/home/components/body.dart';
 import 'package:fish_app_mari/screens/adopt/adopt_page.dart';
 import 'package:fish_app_mari/screens/generate_name/name.dart';
+import 'package:fish_app_mari/screens/aquarium/aquarium_screen.dart';
 import 'package:fish_app_mari/constants.dart';
 import 'package:fish_app_mari/auth_service.dart';
 import 'package:fish_app_mari/auth_provider.dart';
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
-    return Scaffold (
+    return Scaffold(
         appBar: MyAppbar(auth: auth),
         drawer: MyDrawer(),
         bottomNavigationBar: BottomNavigationBar(
@@ -37,9 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           items: [
             BottomNavigationBarItem(
-                label: "어항 자랑",
-                icon: Icon(Icons.home_outlined)
-            ),
+                label: "어항 자랑", icon: Icon(Icons.home_outlined)),
             BottomNavigationBarItem(
               label: "사전",
               icon: Icon(Icons.menu_book_outlined),
@@ -66,14 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
             ),
             AdoptPage(),
-            Text(
-              'News',
-              style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
-            ),
+            AquariumScreen(),
             NamePage(),
           ],
           index: _selectedIndex,
-        )
-    );
+        ));
   }
 }
