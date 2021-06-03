@@ -20,7 +20,6 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
   final _descriptionController = TextEditingController();
   final _fishNameController = TextEditingController();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   final _locationList = [ "전국", "서울", "경기", "인천", "강원", "충북",
                           "충남", "대전", "경북", "대구", "전북", "경남",
                           "울산", "부산", "광주", "전남", "제"];
@@ -95,7 +94,6 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
                   hintText: 'Description',
                 ),
                 maxLines: 3,
-                //keyboardType: TextInputType.multiline,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Enter description to continue';
@@ -161,15 +159,15 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
 
                 if (_formKey.currentState.validate()) {
 
-                  //   함수? var url = uploadImageToFireStorageGetURL(File(_image.path), imageName).toString();
-                  String imageName = _titleController.text + "_" + _firebaseAuth.currentUser.uid;
+                  Timestamp currentTime = Timestamp.now();
+                  String imageName = currentTime.toString() + "_" + _firebaseAuth.currentUser.uid;
                   Reference ref = FirebaseStorage.instance.ref().child('adopt_post').child(imageName);
                   await ref.putFile(File(_image.path));
                   var url = await ref.getDownloadURL();
-                  print("URL: " + url + "\n");
 
                   addAdoptPost(
                     AdoptPost(
+                      id: _firebaseAuth.currentUser.uid,
                       writer: _firebaseAuth.currentUser.displayName,
                       writerImage: _firebaseAuth.currentUser.photoURL,
                       title: _titleController.text,
@@ -177,7 +175,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
                       description: _descriptionController.text,
                       postImageURL: url,
                       location: _selectedLocation,
-                      createdAt: Timestamp.now(),
+                      createdAt: currentTime,
                     ),
                   );
                   Navigator.pop(context);

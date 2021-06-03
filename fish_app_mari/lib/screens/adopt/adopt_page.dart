@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fish_app_mari/constants.dart';
-import 'package:fish_app_mari/model/adopt_post.dart';
 import 'adopt_add.dart';
 import 'posted_adopt_fish.dart';
 

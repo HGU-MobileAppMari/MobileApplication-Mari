@@ -16,7 +16,7 @@ Future<void> addComment({String postId, Comment comment}) {
         'userId': comment.userId,
         'writer': comment.writer,
         'text': comment.text,
-        'created_at': comment.creationTime,
+        'creationTime': comment.creationTime,
       });
     });
   });
@@ -42,6 +42,7 @@ Future<String> uploadImage(File image, String imageName) async {
 Future<void> addAdoptPost(AdoptPost adopt) {
   final posts = FirebaseFirestore.instance.collection('adopt_post');
   return posts.add({
+    'id' : adopt.id,
     'writer': adopt.writer,
     'writer_image': adopt.writerImage,
     'title': adopt.title,
@@ -49,7 +50,7 @@ Future<void> addAdoptPost(AdoptPost adopt) {
     'description': adopt.description,
     'image_url': adopt.postImageURL,
     'created_at': adopt.createdAt,
-    'location': adopt.location
+    'location': adopt.location,
   });
 }
 
