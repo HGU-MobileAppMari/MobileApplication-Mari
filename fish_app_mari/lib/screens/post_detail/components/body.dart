@@ -17,7 +17,6 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ImageAndText(postId: _postId),
-          // TitleAndPrice(title: "Angelica", country: "Russia", price: 440),
           SizedBox(height: kDefaultPadding),
           //PostComment(postId: _postId),
           // Row(

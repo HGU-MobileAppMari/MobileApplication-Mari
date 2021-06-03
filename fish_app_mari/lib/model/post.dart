@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-typedef PostPressedCallback = void Function(String postId);
+typedef PostPressedCallback = void Function(String postId, String userId);
 
 class Post {
   final String id;

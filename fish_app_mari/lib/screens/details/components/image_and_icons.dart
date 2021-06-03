@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 import 'icon_card.dart';
@@ -31,7 +31,7 @@ class ImageAndIcons extends StatelessWidget {
                       child: IconButton(
                         padding:
                             EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                        icon: SvgPicture.asset("assets/icons/back_arrow.svg"),
+                        //icon: SvgPicture.asset("assets/icons/back_arrow.svg"),
                         onPressed: () {
                           Navigator.pop(context);
                         },

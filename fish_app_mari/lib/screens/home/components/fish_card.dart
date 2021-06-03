@@ -26,7 +26,7 @@ class FishCard extends StatelessWidget {
         children: <Widget>[
           Image.network(post.imageURL),
           GestureDetector(
-            onTap: () => _onPressed(post.id),
+            onTap: () => _onPressed(post.id, post.userId),
             child: Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(

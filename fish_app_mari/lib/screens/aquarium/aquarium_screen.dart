@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:fish_app_mari/screens/aquarium/model/test_google_office.dart'
+import 'package:fish_app_mari/screens/aquarium/model/locations.dart'
     as locations;
 
 class AquariumScreen extends StatefulWidget {
