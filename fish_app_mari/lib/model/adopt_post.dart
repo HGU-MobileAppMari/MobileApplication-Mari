@@ -13,8 +13,10 @@ class AdoptPost {
   final Timestamp createdAt;
   final String location; // 전국, 서울, 경기, ... , default = null (전국)
   final DocumentReference reference;
+  final List<dynamic> likeUsers;
 
   AdoptPost({
+    this.id,
     this.writerImage,
     this.writer,
     this.title,
@@ -23,7 +25,7 @@ class AdoptPost {
     this.description,
     this.createdAt,
     this.location})
-      : id = null,
+      : likeUsers = [],
         reference = null;
 
   AdoptPost.fromSnapshot(DocumentSnapshot snapshot)
@@ -37,5 +39,6 @@ class AdoptPost {
         description = snapshot.data()['description'],
         postImageURL = snapshot.data()['image_url'],
         createdAt = snapshot.data()['created_at'],
+        likeUsers = snapshot.data()['likeUsers'],
         location = snapshot.data()['location'];
 }
