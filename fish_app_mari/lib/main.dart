@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         auth: AuthService(),
         child: MaterialApp(
           title: 'Mari',
+          routes: {'/home': (context) => HomeScreen()},
           theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,
             primaryColor: kPrimaryColor,

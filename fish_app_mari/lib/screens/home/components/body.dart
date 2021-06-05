@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fish_app_mari/constants.dart';
-import 'package:fish_app_mari/screens/post_add_or_edit/post_add.dart';
+import 'package:fish_app_mari/screens/post_transaction/post_add.dart';
 
 import 'posted_fish.dart';
 import 'header.dart';

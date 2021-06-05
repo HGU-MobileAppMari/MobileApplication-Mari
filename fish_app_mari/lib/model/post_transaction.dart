@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'post.dart';
 import 'comment.dart';
 
@@ -23,6 +24,24 @@ Future<void> editPost(
     'title': title,
     'description': description,
     'imageURL': imageURL,
+  });
+}
+
+Future<void> deletePost(String postId) async {
+  final firebase_post =
+      FirebaseFirestore.instance.collection('posts').doc(postId);
+  final storage_post = FirebaseStorage.instance;
+  String postCreationTime;
+  String postUserId;
+  String imageName;
+  firebase_post.get().then((value) {
+    postCreationTime = value.data()['creationTime'].toString();
+    postUserId = value.data()['userId'];
+    imageName = postCreationTime + "_" + postUserId;
+    storage_post
+        .ref("/posts/" + imageName)
+        .delete()
+        .then((value) => firebase_post.delete());
   });
 }
 
@@ -56,9 +75,6 @@ Future<void> addComment({String postId, Comment comment}) {
         .get(post)
         .then((DocumentSnapshot doc) => Post.fromSnapshot(doc))
         .then((Post fresh) {
-      //give # of comment ?
-      /*transaction.update(post, {
-      })*/
       transaction.set(newComment, {
         'userId': comment.userId,
         'writer': comment.writer,

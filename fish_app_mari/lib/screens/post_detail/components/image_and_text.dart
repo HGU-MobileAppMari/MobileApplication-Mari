@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fish_app_mari/model/post_transaction.dart';
 import 'package:fish_app_mari/model/post.dart';
 import 'package:fish_app_mari/model/comment.dart';
-import 'package:fish_app_mari/screens/post_add_or_edit/post_edit.dart';
+import 'package:fish_app_mari/screens/post_transaction/post_edit.dart';
 
 import '../../../constants.dart';
 

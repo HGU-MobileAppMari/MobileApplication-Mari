@@ -6,7 +6,8 @@ import 'package:fish_app_mari/auth_provider.dart';
 import 'package:fish_app_mari/components/my_appbar.dart';
 import 'components/body.dart';
 import 'components/unicorn_button.dart';
-import 'package:fish_app_mari/screens/post_add_or_edit/post_edit.dart';
+import 'package:fish_app_mari/screens/post_transaction/post_edit.dart';
+import 'package:fish_app_mari/screens/post_transaction/post_delete.dart';
 import 'package:fish_app_mari/screens/post_detail/components/unicorn_button.dart';
 import 'package:fish_app_mari/model/post.dart';
 
@@ -33,6 +34,7 @@ class PostDetailScreen extends StatelessWidget {
     childButtons.add(
       UnicornButton(
         currentButton: FloatingActionButton(
+          heroTag: "Edit Button",
           backgroundColor: kPrimaryColor,
           mini: true,
           child: Icon(Icons.edit),
@@ -49,12 +51,16 @@ class PostDetailScreen extends StatelessWidget {
     childButtons.add(
       UnicornButton(
         currentButton: FloatingActionButton(
+          heroTag: "Delete Button",
           backgroundColor: kPrimaryColor,
           mini: true,
           child: Icon(Icons.delete),
-          onPressed: () {
-            print('delete~');
-          },
+          onPressed: () => showDeleteDialog(context, _postId),
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => showDeleteDialog(context, _postId),
+          // ),
         ),
       ),
     );
