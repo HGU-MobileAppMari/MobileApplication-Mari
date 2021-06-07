@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fish_app_mari/screens/generate_name/favorite_name_list_page.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({
@@ -38,6 +39,21 @@ class MyDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text('My favorite name'),
+            leading: Icon(
+              Icons.star,
+              color: Colors.yellow[600],
+              semanticLabel: 'My favorite name',
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyFavoritesPage()),
+              );
             },
           ),
         ],
