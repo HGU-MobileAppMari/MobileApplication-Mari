@@ -111,12 +111,28 @@ class _ImageAndTextState extends State<ImageAndText> {
               child: Text(
                 DateFormat('yyyy년 MM월 dd일 kk시mm분')
                     .format(_post.createdAt.toDate()),
+                style: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                top: 10.0,
+                left: 30.0,
+                right: 25.0,
+              ),
+              child: Text(
+                '거래장소: ${_post.location}',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
               ),
             ),
             buildDivider(),
             Container(
               padding: EdgeInsets.only(
-                top: 30.0,
+                top: 20.0,
                 left: 25.0,
                 right: 25.0,
               ),
@@ -127,7 +143,7 @@ class _ImageAndTextState extends State<ImageAndText> {
             ),
             Container(
               padding: EdgeInsets.only(
-                top: 30.0,
+                top: 20.0,
                 left: 25.0,
                 right: 25.0,
               ),
