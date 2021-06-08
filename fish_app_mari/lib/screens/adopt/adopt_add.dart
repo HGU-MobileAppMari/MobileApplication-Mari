@@ -22,7 +22,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final _locationList = [ "전국", "서울", "경기", "인천", "강원", "충북",
                           "충남", "대전", "경북", "대구", "전북", "경남",
-                          "울산", "부산", "광주", "전남", "제"];
+                          "울산", "부산", "광주", "전남", "제주"];
   var _selectedLocation= "전국";
 
   @override
@@ -80,7 +80,6 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
                 decoration: const InputDecoration(
                   hintText: 'Fish name',
                 ),
-                maxLines: 1,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Enter fish name to continue';
@@ -168,6 +167,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
                   addAdoptPost(
                     AdoptPost(
                       id: _firebaseAuth.currentUser.uid,
+                      userId: _firebaseAuth.currentUser.uid,
                       writer: _firebaseAuth.currentUser.displayName,
                       writerImage: _firebaseAuth.currentUser.photoURL,
                       title: _titleController.text,
