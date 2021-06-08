@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+import 'package:fish_app_mari/model/name_transaction.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class NamePage extends StatefulWidget {
@@ -9,87 +11,52 @@ class NamePage extends StatefulWidget {
 
 class _NamePageState extends State<NamePage> {
 
-  final _suggestions = <WordPair>[];
-  final _saved = <WordPair>[];
   final _biggerFont = TextStyle(fontSize: 18.0);
 
   @override
   Widget build(BuildContext context) {
+    String uid = FirebaseAuth.instance.currentUser.uid.toString();
+
     return Scaffold(
-      body: _buildSuggestions(),
-    );
-  }
+      body:  StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('name').snapshots(),
+        builder: (context, snapshot) {
+          if(snapshot.hasData) {
+            return ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  List users = snapshot.data.docs[index]['users'].toList();
+                  String name = snapshot.data.docs[index]['name'];
 
-  Widget _buildSuggestions(){
-    return ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemBuilder: (context, i){
-          if(i.isOdd) return Divider();
-
-          final index = i ~/ 2;
-          if(index >= _suggestions.length){
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+                  return ListTile(
+                      title: Text(name, style: _biggerFont),
+                      leading: Icon(
+                          users.contains(uid)? Icons.star : Icons.star_border,
+                          color: users.contains(uid)? Colors.yellow[600] : Colors.grey,
+                          size: 33.0
+                      ),
+                      onTap: () async {
+                        setState(() {
+                          if(users.contains(uid)) {
+                            // remove
+                            removeFromFavorite(name);
+                          }
+                          else {
+                            // add
+                            addToFavorite(name);
+                          }
+                        });
+                      }
+                  );
+                }
+            );
           }
-          return _buildRow(_suggestions[index]);
+          else {
+            return Container();
+          }
         }
+      )
     );
   }
-
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-      leading: Icon(
-          alreadySaved? Icons.star : Icons.star_border,
-          color: alreadySaved? Colors.yellow : null,
-          size: 33.0
-      ),
-      onTap: (){
-        setState(() {
-          if(alreadySaved){
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
-      },
-    );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-
-        builder: (BuildContext context) {
-          final tiles = _saved.map(
-                (WordPair pair) {
-              return ListTile(
-                title: Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
-                ),
-              );
-            },
-          );
-          final divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-          ).toList();
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Saved Suggestions'),
-            ),
-            body: ListView(children: divided),
-          );
-        }, // ...to here.
-      ),
-    );
-  }
-
-
-
 }
