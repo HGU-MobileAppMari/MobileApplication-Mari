@@ -26,19 +26,7 @@ class ImageAndIcons extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: kDefaultPadding * 3),
                 child: Column(
                   children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                        //icon: SvgPicture.asset("assets/icons/back_arrow.svg"),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Spacer(),
-                    IconCard(icon: "assets/icons/sun.svg"),
+                    IconCard(icon: "assets/icons/flower.svg"),
                     IconCard(icon: "assets/icons/icon_2.svg"),
                     IconCard(icon: "assets/icons/icon_3.svg"),
                     IconCard(icon: "assets/icons/icon_4.svg"),

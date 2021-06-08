@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:fish_app_mari/model/post_transaction.dart';
+import 'package:fish_app_mari/screens/home/home_screen.dart';
 
 Future<void> showDeleteDialog(BuildContext context, String _postId) async {
   return showDialog(
@@ -12,14 +13,12 @@ Future<void> showDeleteDialog(BuildContext context, String _postId) async {
         FlatButton(
           child: Text("네"),
           onPressed: () {
-            Navigator.pop(context);
-            Navigator.pop(context);
             deletePost(_postId);
-            // Navigator.pushNamedAndRemoveUntil(
-            //   context,
-            //   '/home',
-            //   (route) => false,
-            // );
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+              (Route<dynamic> route) => false,
+            );
           },
         ),
         FlatButton(

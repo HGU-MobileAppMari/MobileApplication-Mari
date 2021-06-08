@@ -1,6 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="22.414" height="22.414" viewBox="0 0 22.414 22.414">
-  <g id="Icon_feather-search" data-name="Icon feather-search" transform="translate(-3.5 -3.5)" opacity="0.5">
-    <path id="Path_1" data-name="Path 1" d="M23.131,13.815A9.315,9.315,0,1,1,13.815,4.5,9.315,9.315,0,0,1,23.131,13.815Z" fill="none" stroke="#0c9869" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <path id="Path_2" data-name="Path 2" d="M29.081,29.081l-4.106-4.106" transform="translate(-4.581 -4.581)" fill="none" stroke="#0c9869" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-  </g>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M22 5.80002L17.4 1.90002L16.1 3.40002L20.7 7.30002L22 5.80002ZM7.9 3.50002L6.6 2.00002L2 5.80002L3.3 7.30002L7.9 3.50002ZM8.14342 10.0712L9.44246 9.32121L12.0925 13.9111L16.7566 13.9896L16.6637 15.4288L11.1434 15.2674L8.14342 10.0712ZM12 4.10002C7 4.10002 3 8.10002 3 13.1C3 18.1 7 22.1 12 22.1C17 22.1 21 18.1 21 13.1C21 8.10002 17 4.10002 12 4.10002ZM5 13.1C5 17 8.1 20.1 12 20.1C15.9 20.1 19 17 19 13.1C19 9.20002 15.9 6.10002 12 6.10002C8.1 6.10002 5 9.20002 5 13.1Z" fill="black"/>
 </svg>

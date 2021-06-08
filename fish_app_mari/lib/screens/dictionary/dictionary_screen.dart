@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fish_app_mari/screens/details/components/body.dart';
+import 'components/body.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DictionaryScreen extends StatelessWidget {
+  DictionaryScreen({
+    Key key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

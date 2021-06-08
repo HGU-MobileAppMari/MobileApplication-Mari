@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:fish_app_mari/components/my_appbar.dart';
 import 'package:fish_app_mari/components/my_drawer.dart';
 import 'package:fish_app_mari/screens/home/components/body.dart';
 import 'package:fish_app_mari/screens/adopt/adopt_page.dart';
 import 'package:fish_app_mari/screens/generate_name/name.dart';
 import 'package:fish_app_mari/screens/aquarium/aquarium_screen.dart';
+import 'package:fish_app_mari/screens/dictionary/dictionary_screen.dart';
+//import 'package:fish_app_mari/screens/dictionary_detail/dictionary_detail.dart';
+
 import 'package:fish_app_mari/constants.dart';
 import 'package:fish_app_mari/auth_service.dart';
 import 'package:fish_app_mari/auth_provider.dart';
@@ -53,17 +58,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BottomNavigationBarItem(
               label: "이름짓기",
-              icon: Icon(Icons.set_meal_outlined),
+              icon: SvgPicture.asset(
+                'assets/icons/fish.svg',
+                height: 20.0,
+              ),
             ),
           ],
         ),
         body: IndexedStack(
           children: <Widget>[
             Body(),
-            Text(
-              'Music',
-              style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
-            ),
+            DictionaryScreen(),
             AdoptPage(),
             AquariumScreen(),
             NamePage(),

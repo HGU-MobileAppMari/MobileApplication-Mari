@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:fish_app_mari/screens/home/home_screen.dart';
+
 class MyDrawer extends StatelessWidget {
   MyDrawer({
     Key key,
@@ -37,7 +39,11 @@ class MyDrawer extends StatelessWidget {
               semanticLabel: 'home',
             ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+                (Route<dynamic> route) => false,
+              );
             },
           ),
         ],

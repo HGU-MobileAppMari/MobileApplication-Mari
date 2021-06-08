@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
@@ -16,7 +16,7 @@ class IconCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: size.height * 0.03),
-      padding: EdgeInsets.all(kDefaultPadding / 2),
+      padding: EdgeInsets.all(kDefaultPadding / 4),
       height: 62,
       width: 62,
       decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class IconCard extends StatelessWidget {
           ),
         ],
       ),
-      //child: SvgPicture.asset(icon),
+      child: SvgPicture.asset(icon),
     );
   }
 }

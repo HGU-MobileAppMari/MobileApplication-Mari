@@ -66,13 +66,13 @@ class _ImageAndTextState extends State<ImageAndText> {
       });
     });
   }
-  void getData() {
-    getPost(widget._postId).then((Post post) {
-      setState(() {
-        _post = post;
-      });
-    });
-  }
+  // void getData() {
+  //   getPost(widget._postId).then((Post post) {
+  //     setState(() {
+  //       _post = post;
+  //     });
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -105,7 +105,7 @@ class _ImageAndTextState extends State<ImageAndText> {
 
   @override
   Widget build(BuildContext context) {
-    getData();
+    //getData();
     return _isLoading
         ? Center(child: CircularProgressIndicator())
         : Padding(
