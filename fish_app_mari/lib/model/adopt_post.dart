@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-typedef PostPressedCallback = void Function(String postId);
+typedef PostPressedCallback = void Function(String postId, String userId);
 
 class AdoptPost {
   final String id;
   final String writer;
   final String writerImage;
+  final String userId;
   final String title;
   final String fishName;
   final String postImageURL;
@@ -19,6 +20,7 @@ class AdoptPost {
     this.id,
     this.writerImage,
     this.writer,
+    this.userId,
     this.title,
     this.fishName,
     this.postImageURL,
@@ -34,6 +36,7 @@ class AdoptPost {
         reference = snapshot.reference,
         writer = snapshot.data()['writer'],
         writerImage = snapshot.data()['writer_image'],
+        userId = snapshot.data()['uid'],
         fishName = snapshot.data()['fish_name'],
         title = snapshot.data()['title'],
         description = snapshot.data()['description'],

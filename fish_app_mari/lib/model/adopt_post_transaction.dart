@@ -22,11 +22,40 @@ Future<void> addComment({String postId, Comment comment}) {
   });
 }
 
+Future<void> editAdoptPost(
+    String postId, String title, String description, String imageURL) {
+  final firebase_post =
+  FirebaseFirestore.instance.collection('adopt_post').doc(postId);
+  return firebase_post.update({
+    'title': title,
+    'description': description,
+    'image_url': imageURL,
+  });
+}
+
+Future<void> deleteAdoptPost(String postId) async {
+  print(postId);
+  final firebase_post =
+  FirebaseFirestore.instance.collection('adopt_post').doc(postId);
+  final storage_post = FirebaseStorage.instance;
+  String postCreationTime;
+  String postUserId;
+  String imageName;
+  firebase_post.get().then((value) {
+    postCreationTime = value.data()['created_at'].toString();
+    postUserId = value.data()['uid'];
+    imageName = postCreationTime + "_" + postUserId;
+    storage_post
+        .ref("/adopt_post/" + imageName)
+        .delete()
+        .then((value) => firebase_post.delete());
+  });
+}
+
 Future<String> uploadImageToFireStorageGetURL(File imageFile, String imageName) async {
   Reference ref = FirebaseStorage.instance.ref().child('adopt_post').child(imageName);
   await ref.putFile(imageFile);
   var url = await ref.getDownloadURL();
-  print("URL: " + url + "\n");
   return url;
 }
 
@@ -42,7 +71,8 @@ Future<String> uploadImage(File image, String imageName) async {
 Future<void> addAdoptPost(AdoptPost adopt) {
   final posts = FirebaseFirestore.instance.collection('adopt_post');
   return posts.add({
-    'id' : adopt.id,
+    // 'id' : adopt.id,
+    'uid' : adopt.userId,
     'writer': adopt.writer,
     'writer_image': adopt.writerImage,
     'title': adopt.title,
