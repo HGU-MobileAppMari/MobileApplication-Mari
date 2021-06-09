@@ -25,25 +25,28 @@ class _AdoptPostEditScreenState extends State<AdoptPostEditScreen> {
   final _formKey = GlobalKey<FormState>(debugLabel: '_PostEditScreenState');
   AdoptPost _post;
   var _selectedLocation;
+  var _titleController;
+  var _descriptionController;
+  var _fishNameController;
+  final _locationList = [ "전국", "서울", "경기", "인천", "강원", "충북",
+    "충남", "대전", "경북", "대구", "전북", "경남",
+    "울산", "부산", "광주", "전남", "제주"];
+
 
   _AdoptPostEditScreenState({@required String postId}) {
     getAdoptPost(postId).then((AdoptPost post) {
       setState(() {
         _post = post;
         _selectedLocation = _post.location;
+        _titleController = TextEditingController(text: '${_post.title}');
+        _descriptionController = TextEditingController(text: '${_post.description}');
+        _fishNameController = TextEditingController(text: '${_post.fishName}');
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final _titleController = TextEditingController(text: '${_post.title}');
-    final _descriptionController = TextEditingController(text: '${_post.description}');
-    final _fishNameController = TextEditingController(text: '${_post.fishName}');
-    final _locationList = [ "전국", "서울", "경기", "인천", "강원", "충북",
-      "충남", "대전", "경북", "대구", "전북", "경남",
-      "울산", "부산", "광주", "전남", "제주"];
-
     Widget imageSection = Container(
       padding: EdgeInsets.all(10),
       child: _image == null
