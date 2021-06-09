@@ -23,13 +23,15 @@ Future<void> addComment({String postId, Comment comment}) {
 }
 
 Future<void> editAdoptPost(
-    String postId, String title, String description, String imageURL) {
+    String postId, String title, String description, String imageURL, String fishName, String location) {
   final firebase_post =
   FirebaseFirestore.instance.collection('adopt_post').doc(postId);
   return firebase_post.update({
     'title': title,
     'description': description,
     'image_url': imageURL,
+    'location' : location,
+    'fish_name' : fishName
   });
 }
 

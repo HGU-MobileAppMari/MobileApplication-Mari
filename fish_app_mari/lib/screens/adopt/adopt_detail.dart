@@ -21,7 +21,7 @@ class AdoptDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
-    var childButtons = List<UnicornButton>();
+    var childButtons = <UnicornButton>[];
     childButtons.add(
       UnicornButton(
         currentButton: FloatingActionButton(
@@ -34,9 +34,9 @@ class AdoptDetailScreen extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => AdoptPostEditScreen(postId: _postId),
             ),
-          ),
         ),
       ),
+    )
     );
 
     childButtons.add(
