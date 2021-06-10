@@ -1,48 +1,68 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fish_app_mari/model/adopt_post.dart';
+import 'package:fish_app_mari/screens/adopt/adopt_detail.dart';
 import 'package:fish_app_mari/model/adopt_post_transaction.dart';
 
-class AdoptAddScreen extends StatefulWidget {
+//image edit problem
+class AdoptPostEditScreen extends StatefulWidget {
+  AdoptPostEditScreen({
+    Key key,
+    @required String postId,
+  })  : _postId = postId,
+        super(key: key);
+  final String _postId;
+
   @override
-  _AdoptPostAddScreenState createState() => _AdoptPostAddScreenState();
+  _AdoptPostEditScreenState createState() => _AdoptPostEditScreenState(postId: _postId);
 }
 
-class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
+class _AdoptPostEditScreenState extends State<AdoptPostEditScreen> {
   File _image;
   final picker = ImagePicker();
-  final _formKey = GlobalKey<FormState>(debugLabel: '_AdoptPostAddScreenState');
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _fishNameController = TextEditingController();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>(debugLabel: '_PostEditScreenState');
+  AdoptPost _post;
+  var _selectedLocation;
+  var _titleController;
+  var _descriptionController;
+  var _fishNameController;
   final _locationList = [ "전국", "서울", "경기", "인천", "강원", "충북",
-                          "충남", "대전", "경북", "대구", "전북", "경남",
-                          "울산", "부산", "광주", "전남", "제주"];
-  var _selectedLocation= "전국";
+    "충남", "대전", "경북", "대구", "전북", "경남",
+    "울산", "부산", "광주", "전남", "제주"];
+
+
+  _AdoptPostEditScreenState({@required String postId}) {
+    getAdoptPost(postId).then((AdoptPost post) {
+      setState(() {
+        _post = post;
+        _selectedLocation = _post.location;
+        _titleController = TextEditingController(text: '${_post.title}');
+        _descriptionController = TextEditingController(text: '${_post.description}');
+        _fishNameController = TextEditingController(text: '${_post.fishName}');
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Widget imageSection = Container(
+      padding: EdgeInsets.all(10),
       child: _image == null
-          ? Image.asset(
-              'assets/images/logo.png',
-              width: 600,
-              height: 240,
-              fit: BoxFit.fitHeight,
-            )
+          ? Image.network(
+        _post.postImageURL,
+        width: 600,
+        height: 240,
+        fit: BoxFit.fitHeight,
+      )
           : Image.file(
-              _image,
-              width: 600,
-              height: 240,
-              fit: BoxFit.fitWidth,
-            ),
+        _image,
+        width: 600,
+        height: 240,
+        fit: BoxFit.fitWidth,
+      ),
     );
-
     Widget iconSection = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
@@ -53,7 +73,6 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
             }),
       ],
     );
-
     Widget textSection = Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -65,7 +84,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  hintText: 'Title',
+                  labelText: 'Title',
                   hintStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 validator: (value) {
@@ -76,26 +95,26 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
                 },
               ),
               TextFormField(
-                controller: _fishNameController,
-                decoration: const InputDecoration(
-                  hintText: 'Fish name',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Enter fish name to continue';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
-                  hintText: 'Description',
+                  labelText: 'Description',
                 ),
                 maxLines: 3,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Enter description to continue';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _fishNameController,
+                decoration: const InputDecoration(
+                  labelText: 'Fish name',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter fish name to continue';
                   }
                   return null;
                 },
@@ -125,6 +144,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
         ),
       ),
     );
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -143,7 +163,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
             Padding(
               padding: EdgeInsets.only(left: 90.0, right: 80.0),
               child: Text(
-                'Add',
+                'Edit',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -155,30 +175,42 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
               ),
               child: Text('Save'),
               onPressed: () async {
-
                 if (_formKey.currentState.validate()) {
+                  String imageName =
+                      _post.createdAt.toString() + "_" + _post.id;
+                  Reference ref = FirebaseStorage.instance
+                      .ref()
+                      .child('adopt_post')
+                      .child(imageName);
 
-                  Timestamp currentTime = Timestamp.now();
-                  String imageName = currentTime.toString() + "_" + _firebaseAuth.currentUser.uid;
-                  Reference ref = FirebaseStorage.instance.ref().child('adopt_post').child(imageName);
-                  await ref.putFile(File(_image.path));
-                  var url = await ref.getDownloadURL();
-
-                  addAdoptPost(
-                    AdoptPost(
-                      id: _firebaseAuth.currentUser.uid,
-                      userId: _firebaseAuth.currentUser.uid,
-                      writer: _firebaseAuth.currentUser.displayName,
-                      writerImage: _firebaseAuth.currentUser.photoURL,
-                      title: _titleController.text,
-                      fishName: _fishNameController.text,
-                      description: _descriptionController.text,
-                      postImageURL: url,
-                      location: _selectedLocation,
-                      createdAt: currentTime,
-                    ),
+                  if (_image != null) {
+                    await ref.putFile(File(_image.path));
+                    var url = await ref.getDownloadURL();
+                    editAdoptPost(
+                        widget._postId,
+                        _titleController.text,
+                        _descriptionController.text,
+                        url,
+                        _fishNameController.text,
+                        _selectedLocation
+                    );
+                  }
+                  else {
+                    editAdoptPost(
+                        widget._postId,
+                        _titleController.text,
+                        _descriptionController.text,
+                        _post.postImageURL,
+                        _fishNameController.text,
+                        _selectedLocation
+                    );
+                  }
+                  Navigator.pop(context, widget._postId);
+                  Navigator.pop(context, widget._postId);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AdoptDetailScreen(postId: widget._postId, userId: _post.userId)),
                   );
-                  Navigator.pop(context);
                 }
               },
             ),
@@ -186,19 +218,20 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            imageSection,
-            iconSection,
-            textSection,
-          ],
-        ),
-      )
+          child: Column(
+            children: [
+              imageSection,
+              iconSection,
+              textSection,
+            ],
+          ),
+        )
     );
   }
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);

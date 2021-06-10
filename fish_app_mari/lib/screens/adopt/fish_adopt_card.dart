@@ -25,7 +25,7 @@ class AdoptCard extends StatelessWidget {
         children: <Widget>[
           Image.network(adoptPost.postImageURL),
           GestureDetector(
-            onTap: () => _onPressed(adoptPost.id),
+            onTap: () => _onPressed(adoptPost.id, adoptPost.userId),
             child: Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(

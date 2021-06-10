@@ -35,14 +35,11 @@ class _PostedFishState extends State<PostedFish> {
   Widget build(BuildContext context) {
     return FishGrid(
       posts: _posts,
-      onPostPressed: (id) {
-        print("id: " + id.toString() + "@@\n");
-        // print(_posts[].title)
+      onPostPressed: (id, userId) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AdoptDetailScreen(postId: id),
-            // builder: (context) => null,
+            builder: (context) => AdoptDetailScreen(postId: id, userId: userId),
           ),
         );
       },

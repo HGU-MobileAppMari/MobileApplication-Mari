@@ -1,6 +1,5 @@
 import 'package:fish_app_mari/constants.dart';
 import 'package:flutter/material.dart';
-
 import 'package:fish_app_mari/auth_service.dart';
 import 'package:fish_app_mari/auth_provider.dart';
 import 'package:fish_app_mari/components/my_appbar.dart';

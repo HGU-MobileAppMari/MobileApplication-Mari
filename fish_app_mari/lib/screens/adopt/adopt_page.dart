@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fish_app_mari/constants.dart';
 import 'adopt_add.dart';
 import 'posted_adopt_fish.dart';
+import 'title_with_more_bbtn.dart';
 
 class AdoptPage extends StatefulWidget {
   @override
@@ -17,24 +17,16 @@ class _AdoptPageState extends State<AdoptPage> {
             child: Column(
                 children: [
                   SizedBox(height: 10),
-                  FlatButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    color: kPrimaryColor,
-                    onPressed: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AdoptAddScreen(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      " + NEW ADOPT",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                  TitleWithMoreBtn(
+                      title: "내 물고기 분양시키기",
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AdoptAddScreen(),
+                          ),
+                        );
+                      }),
                   PostedFish(),
                 ]
             ),
