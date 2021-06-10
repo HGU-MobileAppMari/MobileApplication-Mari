@@ -9,7 +9,6 @@ import 'components/unicorn_button.dart';
 import 'package:fish_app_mari/screens/post_transaction/post_edit.dart';
 import 'package:fish_app_mari/screens/post_transaction/post_delete.dart';
 import 'package:fish_app_mari/screens/post_detail/components/unicorn_button.dart';
-import 'package:fish_app_mari/model/post.dart';
 
 @immutable
 class PostDetailScreen extends StatelessWidget {
@@ -27,8 +26,6 @@ class PostDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
-
-    print('post detail screen: $_postId');
     var childButtons = List<UnicornButton>();
 
     childButtons.add(
@@ -56,11 +53,6 @@ class PostDetailScreen extends StatelessWidget {
           mini: true,
           child: Icon(Icons.delete),
           onPressed: () => showDeleteDialog(context, _postId),
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => showDeleteDialog(context, _postId),
-          // ),
         ),
       ),
     );

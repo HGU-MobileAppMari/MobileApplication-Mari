@@ -42,8 +42,10 @@ class _BodyState extends State<Body> {
     _list = List();
     _list.add("구피");
     _list.add("금붕어");
-    _list.add("알파");
+    _list.add("디스커스");
     _list.add("베타");
+    _list.add("엔젤피쉬");
+    _list.add("키싱구라미");
   }
 
   @override
@@ -109,7 +111,7 @@ class ChildItem extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DictionaryDetailScreen(),
+          builder: (context) => DictionaryDetailScreen(name: this.name),
         ),
       ),
     );

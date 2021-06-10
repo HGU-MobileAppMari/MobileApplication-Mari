@@ -34,16 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
           unselectedItemColor: kTextColor.withOpacity(.60),
           selectedFontSize: 14,
           unselectedFontSize: 14,
-          currentIndex: _selectedIndex, //현재 선택된 Index
+          currentIndex: _selectedIndex,
           onTap: (int index) {
             setState(() {
               _selectedIndex = index;
-              print(_selectedIndex.toString() + " ");
             });
           },
           items: [
             BottomNavigationBarItem(
-                label: "어항 자랑", icon: Icon(Icons.home_outlined)),
+              label: "어항 자랑",
+              icon: Icon(Icons.home_outlined),
+            ),
             BottomNavigationBarItem(
               label: "사전",
               icon: Icon(Icons.menu_book_outlined),
@@ -58,9 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BottomNavigationBarItem(
               label: "이름짓기",
+              activeIcon: SvgPicture.asset(
+                'assets/icons/fish.svg',
+                height: 20.0,
+                color: Colors.black,
+              ),
               icon: SvgPicture.asset(
                 'assets/icons/fish.svg',
                 height: 20.0,
+                color: Colors.black.withOpacity(0.6),
               ),
             ),
           ],
