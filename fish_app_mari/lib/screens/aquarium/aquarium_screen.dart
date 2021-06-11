@@ -14,32 +14,23 @@ class AquariumScreen extends StatefulWidget {
 
 class _AquariumScreenState extends State<AquariumScreen> {
   final Map<String, Marker> _markers = {};
-  Location location = Location();
-  LocationData _locationData;
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     final googleOffices = await locations.getGoogleOffices();
-    final LocationData _locationResult = await location.getLocation();
 
     setState(() {
       _markers.clear();
-      // for (final office in googleOffices.offices) {
-      //   final marker = Marker(
-      //     markerId: MarkerId(office.name),
-      //     position: LatLng(office.lat, office.lng),
-      //     infoWindow: InfoWindow(
-      //       title: office.name,
-      //       snippet: office.address,
-      //     ),
-      //   );
-      //   _markers[office.name] = marker;
-      // }
-      _locationData = _locationResult;
-      print('location: $_locationData');
-      _markers['me'] = Marker(
-          markerId: MarkerId('me'),
-          position: LatLng(_locationData.latitude, _locationData.longitude),
-          infoWindow: InfoWindow(title: 'me'));
+      for (final office in googleOffices.offices) {
+        final marker = Marker(
+          markerId: MarkerId(office.name),
+          position: LatLng(office.lat, office.lng),
+          infoWindow: InfoWindow(
+            title: office.name,
+            snippet: '${office.address}\n${office.phone}',
+          ),
+        );
+        _markers[office.name] = marker;
+      }
     });
   }
 
@@ -60,12 +51,14 @@ class _AquariumScreenState extends State<AquariumScreen> {
           child: GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
-              target: LatLng(_locationData.latitude, _locationData.longitude),
+              target: LatLng(37.5642135, 127.0016985),
               zoom: 7,
             ),
             // myLocationButtonEnabled: false,
             markers: _markers.values.toSet(),
-            //myLocationEnabled: true,
+            myLocationEnabled: true,
+            //zoomControlsEnabled: true,
+            zoomGesturesEnabled: true,
           ),
         ),
       ],

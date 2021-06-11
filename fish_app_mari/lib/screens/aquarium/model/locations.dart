@@ -80,10 +80,9 @@ class Locations {
 }
 
 Future<Locations> getGoogleOffices() async {
-  // const googleLocationsURL = 'https://about.google/static/data/locations.json';
   const googleLocationsURL = 'http://wlwlwl321.dothome.co.kr/locations.json';
 
-  // Retrieve the locations of Google offices
+  // Retrieve the locations of Aquariums
   final response = await http.get(Uri.parse(googleLocationsURL));
   if (response.statusCode == 200) {
     return Locations.fromJson(json.decode(utf8.decode((response.bodyBytes))));
