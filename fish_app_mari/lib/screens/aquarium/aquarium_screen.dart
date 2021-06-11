@@ -60,7 +60,7 @@ class _AquariumScreenState extends State<AquariumScreen> {
           child: GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
-              target: const LatLng(37.5642135, 127.0016985),
+              target: LatLng(_locationData.latitude, _locationData.longitude),
               zoom: 7,
             ),
             // myLocationButtonEnabled: false,
