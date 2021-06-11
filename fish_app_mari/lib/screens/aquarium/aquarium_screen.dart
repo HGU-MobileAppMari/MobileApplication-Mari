@@ -57,7 +57,7 @@ class _AquariumScreenState extends State<AquariumScreen> {
             // myLocationButtonEnabled: false,
             markers: _markers.values.toSet(),
             myLocationEnabled: true,
-            //zoomControlsEnabled: true,
+            zoomControlsEnabled: true,
             zoomGesturesEnabled: true,
           ),
         ),

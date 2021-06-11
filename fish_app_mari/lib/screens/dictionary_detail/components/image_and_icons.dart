@@ -98,7 +98,7 @@ class _ImageAndIconsState extends State<ImageAndIcons> {
                           ],
                           image: DecorationImage(
                             alignment: Alignment.centerLeft,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                             image: NetworkImage(_imageURL),
                           ),
                         ),

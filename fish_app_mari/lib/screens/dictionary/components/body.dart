@@ -42,10 +42,14 @@ class _BodyState extends State<Body> {
     _list = List();
     _list.add("구피");
     _list.add("금붕어");
+    _list.add("나비고기");
+    _list.add("남양쥐돔");
+    _list.add("니그로");
     _list.add("디스커스");
     _list.add("베타");
     _list.add("엔젤피쉬");
     _list.add("키싱구라미");
+    _list.add("흰동가리");
   }
 
   @override
