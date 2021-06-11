@@ -60,12 +60,12 @@ class _PostAddScreenState extends State<PostAddScreen> {
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  hintText: 'Title',
+                  hintText: '제목',
                   hintStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Enter title to continue';
+                    return '계속하려면 제목을 입력하세요';
                   }
                   return null;
                 },
@@ -73,13 +73,13 @@ class _PostAddScreenState extends State<PostAddScreen> {
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
-                  hintText: 'Description',
+                  hintText: '설명',
                 ),
                 maxLines: 15,
                 //keyboardType: TextInputType.multiline,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Enter description to continue';
+                    return '계속하려면 설명을 입력하세요';
                   }
                   return null;
                 },
@@ -99,7 +99,7 @@ class _PostAddScreenState extends State<PostAddScreen> {
               style: TextButton.styleFrom(
                 primary: Colors.white,
               ),
-              child: Text('Cancel'),
+              child: Text('취소'),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -107,7 +107,7 @@ class _PostAddScreenState extends State<PostAddScreen> {
             Padding(
               padding: EdgeInsets.only(left: 90.0, right: 80.0),
               child: Text(
-                'Add',
+                '작성',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -117,7 +117,7 @@ class _PostAddScreenState extends State<PostAddScreen> {
               style: TextButton.styleFrom(
                 primary: Colors.white,
               ),
-              child: Text('Save'),
+              child: Text('저장'),
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   Timestamp createdTime = Timestamp.now();

@@ -117,7 +117,7 @@ class _PostEditScreenState extends State<PostEditScreen> {
               style: TextButton.styleFrom(
                 primary: Colors.white,
               ),
-              child: Text('Cancel'),
+              child: Text('취소'),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -125,7 +125,7 @@ class _PostEditScreenState extends State<PostEditScreen> {
             Padding(
               padding: EdgeInsets.only(left: 90.0, right: 80.0),
               child: Text(
-                'Edit',
+                '수정',
                 style: TextStyle(
                   color: Colors.white,
                 ),

@@ -34,7 +34,7 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('Home'),
+            title: Text('홈'),
             leading: Icon(
               Icons.home,
               semanticLabel: 'home',
@@ -48,7 +48,7 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('My favorite name'),
+            title: Text('저장된 이름'),
             leading: Icon(
               Icons.star,
               color: Colors.yellow[600],

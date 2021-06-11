@@ -26,7 +26,7 @@ class TitleWithMoreBtn extends StatelessWidget {
             color: kPrimaryColor,
             onPressed: press,
             child: Text(
-              "ADD",
+              "작성",
               style: TextStyle(color: Colors.white),
             ),
           ),
