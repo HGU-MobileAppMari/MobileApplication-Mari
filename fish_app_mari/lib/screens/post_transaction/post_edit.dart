@@ -157,6 +157,7 @@ class _PostEditScreenState extends State<PostEditScreen> {
                     url,
                   );
                   Navigator.pop(context, widget._postId);
+                  Navigator.pop(context, widget._postId);
                 }
               },
             ),

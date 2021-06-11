@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:fish_app_mari/auth_service.dart';
+import 'package:fish_app_mari/auth_provider.dart';
 import 'package:fish_app_mari/model/post_transaction.dart';
 import 'package:fish_app_mari/model/post.dart';
 import 'package:fish_app_mari/model/comment.dart';
-import 'package:fish_app_mari/screens/post_transaction/post_edit.dart';
 
 import '../../../constants.dart';
 
@@ -105,7 +106,8 @@ class _ImageAndTextState extends State<ImageAndText> {
 
   @override
   Widget build(BuildContext context) {
-    //getData();
+    final AuthService auth = Provider.of(context).auth;
+
     return _isLoading
         ? Center(child: CircularProgressIndicator())
         : Padding(
@@ -243,50 +245,66 @@ class _ImageAndTextState extends State<ImageAndText> {
                     ),
                   ),
                   for (var comment in _comments)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 5.0,
-                        bottom: 5.0,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 20.0,
+                    PopupMenuButton(
+                      onSelected: (int index) {
+                        deleteComment(_post.id, comment.id);
+                      },
+                      itemBuilder: (context) {
+                        return List.generate(1, (index) {
+                          return PopupMenuItem(
+                            value: index,
+                            child: auth.firebaseAuth.currentUser.uid ==
+                                    comment.userId
+                                ? Text('삭제')
+                                : null,
+                          );
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 5.0,
+                          bottom: 5.0,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 20.0,
+                                    ),
+                                    child: Text(
+                                      comment.writer,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
                                   ),
-                                  child: Text(
-                                    comment.writer,
-                                    style: TextStyle(fontSize: 18),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 20.0,
+                                    ),
+                                    child: Text(
+                                      comment.text,
+                                      style: TextStyle(fontSize: 14),
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 20.0,
-                                  ),
-                                  child: Text(
-                                    comment.text,
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 15.0, right: 10.0),
-                            child: Text(
-                              '${DateFormat('yyyy년 MM월 dd일').format(comment.creationTime.toDate())}\n${DateFormat('kk시mm분').format(comment.creationTime.toDate())}',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black.withOpacity(0.5)),
-                            ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 15.0, right: 10.0),
+                              child: Text(
+                                '${DateFormat('yyyy년 MM월 dd일').format(comment.creationTime.toDate())}\n${DateFormat('kk시mm분').format(comment.creationTime.toDate())}',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black.withOpacity(0.5)),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                 ],

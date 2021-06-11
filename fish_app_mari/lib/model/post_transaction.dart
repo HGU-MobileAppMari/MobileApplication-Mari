@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'post.dart';
 import 'comment.dart';
@@ -83,4 +84,10 @@ Future<void> addComment({String postId, Comment comment}) {
       });
     });
   });
+}
+
+Future<void> deleteComment(String postId, String commentId) {
+  final post = FirebaseFirestore.instance.collection('posts').doc(postId);
+  final comment = post.collection('comments').doc(commentId);
+  return comment.delete();
 }
