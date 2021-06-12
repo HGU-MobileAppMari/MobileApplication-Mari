@@ -47,22 +47,39 @@ class _AdoptPostEditScreenState extends State<AdoptPostEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget getImage() {
+      if(_image == null) {
+        if(_post == null) {
+          return Image.asset(
+            'assets/images/logo.png',
+            width: 600,
+            height: 240,
+            fit: BoxFit.fitHeight,
+          );
+        }
+        return Image.network(
+          _post.postImageURL,
+          width: 600,
+          height: 240,
+          fit: BoxFit.fitHeight,
+        );
+      }
+      else {
+        return Image.file(
+          _image,
+          width: 600,
+          height: 240,
+          fit: BoxFit.fitWidth,
+        );
+      }
+    }
+
     Widget imageSection = Container(
-      padding: EdgeInsets.all(10),
-      child: _image == null
-          ? Image.network(
-        _post.postImageURL,
-        width: 600,
-        height: 240,
-        fit: BoxFit.fitHeight,
-      )
-          : Image.file(
-        _image,
-        width: 600,
-        height: 240,
-        fit: BoxFit.fitWidth,
-      ),
-    );
+        padding: EdgeInsets.all(10),
+        child: getImage()
+      );
+
+
     Widget iconSection = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[

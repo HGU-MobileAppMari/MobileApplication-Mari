@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:fish_app_mari/model/adopt_post.dart';
 import 'package:fish_app_mari/constants.dart';
@@ -51,7 +51,7 @@ class AdoptCard extends StatelessWidget {
                             text: "${adoptPost.title}\n",
                             style: Theme.of(context).textTheme.button),
                         TextSpan(
-                          text: "${adoptPost.createdAt.toDate()}",
+                          text: "${DateFormat('yyyy년 MM월 dd일 kk시mm분').format(adoptPost.createdAt.toDate())}",
                           style: TextStyle(
                             color: kPrimaryColor.withOpacity(0.5),
                           ),

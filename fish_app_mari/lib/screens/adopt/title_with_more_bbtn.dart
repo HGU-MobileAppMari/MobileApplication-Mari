@@ -25,7 +25,7 @@ class TitleWithMoreBtn extends StatelessWidget {
             color: kPrimaryColor,
             onPressed: press,
             child: Text(
-              "+ NEW ADOPT",
+              "+ 분양글 작성",
               style: TextStyle(color: Colors.white),
             ),
           ),
