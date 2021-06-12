@@ -65,7 +65,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  hintText: 'Title',
+                  hintText: '제목',
                   hintStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 validator: (value) {
@@ -78,7 +78,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
               TextFormField(
                 controller: _fishNameController,
                 decoration: const InputDecoration(
-                  hintText: 'Fish name',
+                  hintText: '물고기 이름',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -90,7 +90,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
-                  hintText: 'Description',
+                  hintText: '설명',
                 ),
                 maxLines: 3,
                 validator: (value) {
@@ -135,7 +135,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
               style: TextButton.styleFrom(
                 primary: Colors.white,
               ),
-              child: Text('Cancel'),
+              child: Text('취소'),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -143,7 +143,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
             Padding(
               padding: EdgeInsets.only(left: 90.0, right: 80.0),
               child: Text(
-                'Add',
+                '글 작성',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -153,7 +153,7 @@ class _AdoptPostAddScreenState extends State<AdoptAddScreen> {
               style: TextButton.styleFrom(
                 primary: Colors.white,
               ),
-              child: Text('Save'),
+              child: Text('저장'),
               onPressed: () async {
 
                 if (_formKey.currentState.validate()) {

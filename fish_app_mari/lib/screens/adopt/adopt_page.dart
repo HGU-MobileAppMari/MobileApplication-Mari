@@ -18,7 +18,7 @@ class _AdoptPageState extends State<AdoptPage> {
                 children: [
                   SizedBox(height: 10),
                   TitleWithMoreBtn(
-                      title: "내 물고기 분양시키기",
+                      title: "내 물고기 분양하기",
                       press: () {
                         Navigator.push(
                           context,
